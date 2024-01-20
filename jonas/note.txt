@@ -1,0 +1,47 @@
+TIPS
+
+* The && operator is used to validate the condition on the left side of the operator before performing the operation on the right side.
+* If you have to use a component multiple times to display different values, it is better to store the items in a list, then use the map function to introspect.
+* If it serves one particular purpose and can be reused, it is a component.
+* Always treat react variables as immutable. If you want to change anything, use the react-provided tools like useState's [var, varMutationFunction].
+* Update a state with the current value of the current state. Avoid explicitly assigning new values during a state update; use a function instead.
+* Form elements are usually handled by the DOM. In order to handle them via react, the 3 procedures are followed:
+	# create a state
+	# Parse the state variable into the element's value attribute
+	# Handle the state change
+* Parsing the expression of a function in () serves as a return expression.
+* Parsing the expression of a funciton in {} serves as a statement expression.
+* Data doesn't flow sideways or up the tree. It flows down the component tree.
+* State VS Props
+	# State is an internal data
+	$ Props is an external data parsed from a parent component
+* Use DERIVED STATES if the state of a component is dependent on an existing state.
+* The string method "localeCompare(compareString, locales(i.e special character declaration like language), options(what option should be applied during the comparison))", is used to check the "if the current stringValue is greater/less/equal-to the previous stringValue".
+	It returns -ve, +ve or 0 values if the comparison is less, greater or equal-to respectively.
+
+* Using the localeCompare method and the .sort() array method helps compare values and sort them in the specified order.
+
+* .slice() => produces a shallow copy of the array it is called on.
+
+.sort(a,b) => a - b; sorts the array in ascending order.
+
+
+
+THINKING IN REACT
+
+* Break the desired UI into components and establish a component tree.
+* Build a static version in React (without state).
+* Think about state:
+	# When to use state
+	# Types of state : local || global
+	# Where to place each state
+* Establish data flow: 
+	# One-way data flow
+	# Child-to-parent communication
+	# Accessing global state
+
+STATE
+
+* Lifting Up State: this is the principle that is used when a state is meant to be used by a sibling component of
+	the component the state was declared. The principle entails "lifting up" the state declaration to a parent
+	component, then passing down the state as props to the children that need it.
