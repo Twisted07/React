@@ -1,9 +1,17 @@
+* {
+  box-sizing: border-box;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
+
+ul {
+  list-style: none;
+}
+
 
 .logo {
   height: 6em;
@@ -39,4 +47,42 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.income__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.income__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  gap: 10px;
+}
+
+.serial-number {
+  flex: 0 0 10%;
+  border: 2px solid white;
+}
+
+.item {
+  flex: 0 0 50%;
+  text-align: left;
+  border: 2px solid white;
+  padding: 2px;
+
+}
+
+.amount {
+  flex: 0 0 20%;
+  border: 2px solid white;
+
+}
+
+.deleteBtn {
+  flex: 1;
 }
