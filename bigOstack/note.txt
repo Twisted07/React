@@ -25,6 +25,7 @@ TIPS
 
 .sort(a,b) => a - b; sorts the array in ascending order.
 
+* In a case whereby you want to make use of an on and off simulation, it is best practice to toggle your state between true and false.
 
 
 THINKING IN REACT
@@ -52,3 +53,20 @@ CHILDREN PROP
 	<Button>Hello Twisted!</Button>
 
 	The "Hello Twisted!" is parsed into the component by calling the "children" attribute as a prop.
+
+Basically, react is all about rendering all the components to the DOM, then upon a triggered change, a rerender occurs and the commit from the re-render is updated to the dom.
+This occurs over and over until there is the component is then unmounted.
+
+BATCHING
+
+* Batching is the process of running multiple operations, triggered by an event, without causing too many re-renders.
+This process allows multiple updating of states without calling for a re-render at every instance.
+
+	State Queueing allows updating state value and using it to without triggering a re-render. This is done by passing the value as an argument in a function where the update is then carried out.
+
+UPDATING OBJECTS IN STATE
+
+* A state can also hold objects as value. In order to update this type of state, we need to recall that react values are meant to be immutable, hence, we have to make a copy of the object then update the new object.
+* Using the hook "useImmer" from the react library "use-immer". This react hook abstracts the whole destructuring process, leaving you a handle "draft", which can then be used for the mutation.
+ 
+UPDATING ARRAYS IN STATE
