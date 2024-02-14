@@ -52,3 +52,14 @@ CHILDREN PROP
 	<Button>Hello Twisted!</Button>
 
 	The "Hello Twisted!" is parsed into the component by calling the "children" attribute as a prop.
+
+COMPONENT CATEGORIES
+
+* Stateless components : components without states
+* Stateful components : components with states
+* Structural components : components that render other components.
+
+COMPONENT COMPOSITION
+
+* Using the children component can be helpful in fixing the whole prop drilling issue, by simply
+parsing the children components as children props rather than creating the components as siblings/children.
