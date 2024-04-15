@@ -63,3 +63,40 @@ COMPONENT COMPOSITION
 
 * Using the children component can be helpful in fixing the whole prop drilling issue, by simply
 parsing the children components as children props rather than creating the components as siblings/children.
+
+
+useEFFECT
+
+* In a fetch, we must ensure irrelevant fetches are cancelled so as be sure the most relevant fetch is what is carried out.
+	This is done by creating an abortController, adding the signal to the fetch, then calling the abort in the cleanUp function.
+* If an event listener is added, the cleanup function should contain the remove event listener function with the same function passed into the addEventListener
+
+useRef
+
+* Use ref is a hook that helps keep a record of data persistent across component
+	life-cycle.
+* They are completely mutable
+* Is used to create variables that can remain constant through re-renders
+* refs are preferable for data that are not rendered. If the data is to be rendered,
+	use states instead.
+
+REACT ROUTER
+
+* The tags encapsulated within the browserRouter tag are the only things that
+	get re-rendered and re-routed.
+* Using the anchor tag (a href) to link a page causes a total page re-render, which
+	is not the react way of loading a single page application. It is done with the 
+	Link tag.
+* The Outlet tag is similar to the children props used to display the content between a component tag. In the Outlet tag's case, it is used to display the 
+	content of an element attribute in a nested route. So, depending on the route that is accessed, the outlet updates the UI to display the content of that route.
+
+DEVELOPMENT TIPS
+
+* Define the entities your program entails
+* State the pages each entity should have
+* Define the components each page is meant to have
+* Define the states each component is meant to have
+* Categorize the state - global or local - based on where the state data is required.
+* Categorize each state - remote or ui - based on the type of data it interacts with (async data or sync data)
+	hence, useEffect or useState/reducer/useRef
+
