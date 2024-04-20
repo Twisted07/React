@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { CitiesContext } from '../contexts/CitiesContext';
 
 function CityItem({city}) {
-  const {currCity} = useContext(CitiesContext);
+  const {currCity, deleteCity} = useContext(CitiesContext);
   const {cityName, emoji, date, id, position} = city;
 
   const formatDate = (date) =>
@@ -16,6 +16,13 @@ function CityItem({city}) {
     weekday: "long",
   }).format(new Date(date));
 
+  function handleClick(e) {
+    e.preventDefault();
+
+    deleteCity(id);
+    // console.log(typeof id, "id");
+  }
+
 
   if (!city) return <Message message='Welcome! Please select a location on the map to get started' />;
         
@@ -25,7 +32,7 @@ function CityItem({city}) {
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
         <time className={styles.date}>{formatDate(date)}</time>
-        <button className={styles.deleteBtn}>&times;</button>
+        <button className={styles.deleteBtn} onClick={handleClick}>&times;</button>
       </Link>
     </li>
 )
