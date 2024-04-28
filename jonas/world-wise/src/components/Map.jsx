@@ -6,6 +6,7 @@ import { CitiesContext } from '../contexts/CitiesContext';
 import { useGeolocation } from '../hooks/useGeolocation.js';
 import Button from './Button';
 import { useUrlPosition } from '../hooks/useURLPosition.js';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 //#region Map Function
 function Map() {
@@ -77,10 +78,15 @@ function FocusPinPosition ({position}) {
 
 function DetectClick() {
   const navigate = useNavigate();
-
+  // const {isAuthenticated} = useAuth();
+  
+  
   useMapEvents({
     click: e => {
-      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); 
+      // if (!isAuthenticated)
+      //   navigate('/login');
+      // else
+        navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); 
     }
   })
 }

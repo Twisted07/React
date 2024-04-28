@@ -4,6 +4,8 @@ import Message from './Message';
 import Spinner from './Spinner';
 import { useContext } from 'react';
 import { CitiesContext } from '../contexts/CitiesContext';
+import { useAuth } from '../contexts/AuthContext';
+import Login from '../pages/Login';
 
 
 function CityList() {
@@ -17,6 +19,7 @@ function CityList() {
         <Message message='Add your first city by clicking on a city on the map.' />
     );
 
+  
   return (
     <ul className={styles.cityList}>
         {
