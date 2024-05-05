@@ -99,4 +99,14 @@ DEVELOPMENT TIPS
 * Categorize the state - global or local - based on where the state data is required.
 * Categorize each state - remote or ui - based on the type of data it interacts with (async data or sync data)
 	hence, useEffect or useState/reducer/useRef
+*If you don't need a child component to re-render, pass it as a children props 
+	to the parent component.
+*useMemo and Memo() are used to preserve objects and data (respectively) across re-renders, storing them in cache until the data changes.
+	Hence, a memoized child component or object is never re-rendered alongside the parent component unless its value changes.
+
+* useCallback() is used to memoize functions just like useMemo() does to objects.
+* Context optimization should occur only when:
+	- The app is slow
+	- The context has too many re-renders
+	- The context has a high consumption rate
 
