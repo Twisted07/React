@@ -110,3 +110,9 @@ DEVELOPMENT TIPS
 	- The context has too many re-renders
 	- The context has a high consumption rate
 
+REDUX
+
+Redux is used for managing global state across an application. It is similar to CONTEXT but its reducers are first stored in a store before rendering.
+It also has some functions like 'useSelector' for selecting an object/object attribute from the reducers in the store.
+Another function is the useDispatch function which is used to dispatch events stored in the reducer.
+Just like context, the store has to be uses a provider to wrap its values around the required component or in most cases, the entire app.

@@ -1,48 +1,68 @@
-const accountInitialState = {
+import { createSlice } from "@reduxjs/toolkit"
+
+const initialState = {
     balance: 0,
     loan: 0,
     loanPurpose: "",
 }
 
-export default function accountReducer (state = accountInitialState, action) {
-    switch(action.type) {
-        case "account/deposit": 
-            return {...state, balance: state.balance + action.payload};
-        
-        case "account/withdraw":
-            if (state.balance !== 0)
-                return {...state, balance: state.balance - action.payload};
-            else alert("insufficient balance!"); return;
-        
-        case "account/requestLoan":
-            if (state.loan > 0) return state;
-                return {...state, loan: action.payload.amount, loanPurpose: action.payload.purpose, balance: state.balance + action.payload.amount};
-
-        case "account/settleLoan":
-            if (state.loan > state.balance) {
-                alert('Could not settle loan due to insufficent balance');
-                return state;
+const accountSlice = createSlice({
+    name: "account",
+    initialState,
+    reducers: {
+        deposit(state, action) {
+            state.balance += action.payload;
+        },
+        withdraw(state, action) {
+            if (state.balance < action.payload) {
+                alert("Insufficient Balance!");
+                return;
             }
-            return {...state, loanPurpose: "", loan: 0, balance: state.balance - state.loan};
+            state.balance -= action.payload;
+        },
+        requestLoan: {
+            prepare(amount, purpose) {
+                return {
+                    payload: {amount, purpose}
+                }
+            },
 
-        default:
-            return state;
+            reducer(state, action) {
+                if (state.loan > 0) return;
+                state.loan = Number(action.payload.amount);
+                state.loanPurpose = action.payload.purpose;
+                state.balance += Number(action.payload.amount);
+            }
+
+
+        },
+        settleLoan(state, action) {
+            if (state.loan > state.balance) {
+                alert('Could not settle loan due to insufficient balance');
+                return;
+            }
+            state.balance -= state.loan;
+            state.loanPurpose = "";
+            state.loan = 0;
+        },
+    }
+})
+
+export function deposit(amount, currency) {
+    if (currency === 'USD') {
+        return ({type: 'account/deposit', payload: amount});
+    }
+    return async function (dispatch, getState) {
+        const response = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${currency}&to=USD`);
+        const data = await response.json();
+
+        const converted = data.rates.USD;
+        console.log(converted, "converted rate")
+        dispatch({type: 'account/deposit', payload: converted});
     }
 }
 
+export const { withdraw, requestLoan, settleLoan } = accountSlice.actions;
 
-export function deposit(amount) {
-    return ({type: 'account/deposit', payload: amount});
-}
+export default accountSlice.reducer;
 
-export function withdraw(amount) {
-    return ({type: 'account/withdraw', payload: amount});
-}
-
-export function requestLoan(amount, reason) {
-    return ({type: 'account/requestLoan', payload: {amount: amount, purpose: reason}});
-}
-
-export function settleLoan() {
-    return ({type: 'account/settleLoan'});
-}
