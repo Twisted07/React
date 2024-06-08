@@ -1,0 +1,118 @@
+TIPS
+
+* The && operator is used to validate the condition on the left side of the operator before performing the operation on the right side.
+* If you have to use a component multiple times to display different values, it is better to store the items in a list, then use the map function to introspect.
+* If it serves one particular purpose and can be reused, it is a component.
+* Always treat react variables as immutable. If you want to change anything, use the react-provided tools like useState's [var, varMutationFunction].
+* Update a state with the current value of the current state. Avoid explicitly assigning new values during a state update; use a function instead.
+* Form elements are usually handled by the DOM. In order to handle them via react, the 3 procedures are followed:
+	# create a state
+	# Parse the state variable into the element's value attribute
+	# Handle the state change
+* Parsing the expression of a function in () serves as a return expression.
+* Parsing the expression of a funciton in {} serves as a statement expression.
+* Data doesn't flow sideways or up the tree. It flows down the component tree.
+* State VS Props
+	# State is an internal data
+	$ Props is an external data parsed from a parent component
+* Use DERIVED STATES if the state of a component is dependent on an existing state.
+* The string method "localeCompare(compareString, locales(i.e special character declaration like language), options(what option should be applied during the comparison))", is used to check the "if the current stringValue is greater/less/equal-to the previous stringValue".
+	It returns -ve, +ve or 0 values if the comparison is less, greater or equal-to respectively.
+
+* Using the localeCompare method and the .sort() array method helps compare values and sort them in the specified order.
+
+* .slice() => produces a shallow copy of the array it is called on.
+
+.sort(a,b) => a - b; sorts the array in ascending order.
+
+
+
+THINKING IN REACT
+
+* Break the desired UI into components and establish a component tree.
+* Build a static version in React (without state).
+* Think about state:
+	# When to use state
+	# Types of state : local || global
+	# Where to place each state
+* Establish data flow: 
+	# One-way data flow
+	# Child-to-parent communication
+	# Accessing global state
+
+STATE
+
+* Lifting Up State: this is the principle that is used when a state is meant to be used by a sibling component of
+	the component the state was declared. The principle entails "lifting up" the state declaration to a parent
+	component, then passing down the state as props to the children that need it.
+
+CHILDREN PROP
+
+* Children prop is a pre-defined keyword in react that represents all the content in the component element.
+	<Button>Hello Twisted!</Button>
+
+	The "Hello Twisted!" is parsed into the component by calling the "children" attribute as a prop.
+
+COMPONENT CATEGORIES
+
+* Stateless components : components without states
+* Stateful components : components with states
+* Structural components : components that render other components.
+
+COMPONENT COMPOSITION
+
+* Using the children component can be helpful in fixing the whole prop drilling issue, by simply
+parsing the children components as children props rather than creating the components as siblings/children.
+
+
+useEFFECT
+
+* In a fetch, we must ensure irrelevant fetches are cancelled so as be sure the most relevant fetch is what is carried out.
+	This is done by creating an abortController, adding the signal to the fetch, then calling the abort in the cleanUp function.
+* If an event listener is added, the cleanup function should contain the remove event listener function with the same function passed into the addEventListener
+
+useRef
+
+* Use ref is a hook that helps keep a record of data persistent across component
+	life-cycle.
+* They are completely mutable
+* Is used to create variables that can remain constant through re-renders
+* refs are preferable for data that are not rendered. If the data is to be rendered,
+	use states instead.
+
+REACT ROUTER
+
+* The tags encapsulated within the browserRouter tag are the only things that
+	get re-rendered and re-routed.
+* Using the anchor tag (a href) to link a page causes a total page re-render, which
+	is not the react way of loading a single page application. It is done with the 
+	Link tag.
+* The Outlet tag is similar to the children props used to display the content between a component tag. In the Outlet tag's case, it is used to display the 
+	content of an element attribute in a nested route. So, depending on the route that is accessed, the outlet updates the UI to display the content of that route.
+
+DEVELOPMENT TIPS
+
+* Define the entities your program entails
+* State the pages each entity should have
+* Define the components each page is meant to have
+* Define the states each component is meant to have
+* Categorize the state - global or local - based on where the state data is required.
+* Categorize each state - remote or ui - based on the type of data it interacts with (async data or sync data)
+	hence, useEffect or useState/reducer/useRef
+*If you don't need a child component to re-render, pass it as a children props 
+	to the parent component.
+*useMemo and Memo() are used to preserve objects and data (respectively) across re-renders, storing them in cache until the data changes.
+	Hence, a memoized child component or object is never re-rendered alongside the parent component unless its value changes.
+
+* useCallback() is used to memoize functions just like useMemo() does to objects.
+* Context optimization should occur only when:
+	- The app is slow
+	- The context has too many re-renders
+	- The context has a high consumption rate
+
+REDUX
+
+Redux is used for managing global state across an application. It is similar to CONTEXT but its reducers are first stored in a store before rendering.
+It also has some functions like 'useSelector' for selecting an object/object attribute from the reducers in the store.
+Another function is the useDispatch function which is used to dispatch events stored in the reducer.
+Just like context, the store has to be uses a provider to wrap its values around the required component or in most cases, the entire app.
